@@ -4,7 +4,7 @@
     "author": "Emilio L. Aleman <emiliolaleman@gmail.com>",
     "description": "A local web application made using ElectronJS + Vue to track one's income and expenses",
     "license": null,
-    "main": "./dist/electron/main.js",
+    "main": "main.js",
     "scripts": {
         "build": "node .electron-vue/build.js && electron-builder",
         "build:dir": "node .electron-vue/build.js && electron-builder --dir",
@@ -17,7 +17,7 @@
         "pack": "npm run pack:main && npm run pack:renderer",
         "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
         "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-        "start": "node .electron-vue/dev-runner.js",
+        "start": "electron .",
         "test": "npm run e2e",
         "postinstall": "npm run lint:fix"
     },
