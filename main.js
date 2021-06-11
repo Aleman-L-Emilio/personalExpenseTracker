@@ -22,6 +22,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
+    // app won't fully close if it's on mac so this line is here just to make sure it doesn't get left open accidentally
     if (process.platform !== 'darwin') {
         app.quit();
     }
