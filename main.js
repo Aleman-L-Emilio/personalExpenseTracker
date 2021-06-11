@@ -7,8 +7,8 @@ let win;
 
 app.on('ready', () => {
     const electronScreen = electron.screen;
-    const { width, height } = electronScreen.getPrimaryDisplay().workAreaSize
-    win = new BrowserWindow({ width, height })
+    // const { width, height } = electronScreen.getPrimaryDisplay().workAreaSize
+    win = new BrowserWindow({ width: 1400, height: 800 })
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
