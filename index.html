@@ -1,25 +1,25 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Personal Expense Tracker</title>
     <style>
-     
-     .scrollBox{
-         position: absolute;
-         left: 20%;
-         top: 15%;
-         height:84%;
-         width:79%;
-         border:1px solid #4e4e4e;
-         font:16px Arial, Serif;
-         overflow:auto;
-    }
-    .headers{
-        position: absolute;
-        left: 20%;
-        top:10%;
+        .scrollBox {
+            position: absolute;
+            left: 20%;
+            top: 10%;
+            height: 78%;
+            width: 79%;
+            border: 1px solid #4e4e4e;
+            font: 16px Arial, Serif;
+            overflow: auto;
+        }
         
-    }
+        .headers {
+            position: absolute;
+            left: 20%;
+            top: 8%;
+        }
     </style>
 </head>
 
@@ -27,29 +27,29 @@
     <div class="container">
         <h1>Personal Expense Tracker</h1>
     </div>
-     <div class = "headers">
-     <table>
-    <tr>
-    <td style="width:10%">Date</td>
-     <td style="width:10%">
-    Payee
-    </td>
-     <td style="width:10%">
-    Catagory
-    </td>
-     <td style="width:10%">
-    Payment
-    </td>
-     <td style="width:10%">
-    Date
-    </td>
-    </tr>
-    </table>
+    <div class="headers">
+        <table>
+            <tr>
+                <td style="width:10%">Date</td>
+                <td style="width:10%">
+                    Payee
+                </td>
+                <td style="width:10%">
+                    Catagory
+                </td>
+                <td style="width:10%">
+                    Payment
+                </td>
+                <td style="width:10%">
+                    Date
+                </td>
+            </tr>
+        </table>
     </div>
-   <div class = "scrollBox" >
-   
+    <div class="scrollBox">
+
     </div>
-    </body>
+</body>
 <script>
     require('./renderer.js');
 </script>
