@@ -8,14 +8,18 @@ let win;
 app.on('ready', () => {
     const electronScreen = electron.screen;
     const { width, height } = electronScreen.getPrimaryDisplay().workAreaSize
-    win = new BrowserWindow({ width, height })
+    win = new BrowserWindow({
+        height: 800,
+        width: 1400,
+        useContentSize: true
+    })
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file',
         slashes: true
     }));
-
+    
     win.on('closed', () => {
         win = null;
     })
