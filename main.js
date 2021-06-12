@@ -9,8 +9,8 @@ app.on('ready', () => {
     const electronScreen = electron.screen;
     const { width, height } = electronScreen.getPrimaryDisplay().workAreaSize
     win = new BrowserWindow({
-        height: 800,
         width: 1400,
+        height: 800,
         useContentSize: true
     })
 
@@ -26,6 +26,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
+    // app won't fully close if it's on mac so this line is here just to make sure it doesn't get left open accidentally
     if (process.platform !== 'darwin') {
         app.quit();
     }
