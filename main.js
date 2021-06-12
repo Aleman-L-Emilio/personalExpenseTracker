@@ -15,7 +15,7 @@ app.on('ready', () => {
     })
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, 'app/index.html'),
         protocol: 'file',
         slashes: true
     }));
