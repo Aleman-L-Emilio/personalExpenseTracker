@@ -1,0 +1,60 @@
+.scrollBox {
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    height: 78%;
+    width: 79%;
+    border: 1px solid #4e4e4e;
+    font: 16px Arial, Serif;
+    overflow: auto;
+}
+
+.headers {
+    position: absolute;
+    left: 20%;
+    top: 7%;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: flexbox;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #4e4e4e;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+@media(min-width: 760px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+    #sidebar-wrapper {
+        width: 250px;
+    }
+}

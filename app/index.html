@@ -1,32 +1,35 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Personal Expense Tracker</title>
-    <style>
-        .scrollBox {
-            position: absolute;
-            left: 20%;
-            top: 10%;
-            height: 78%;
-            width: 79%;
-            border: 1px solid #4e4e4e;
-            font: 16px Arial, Serif;
-            overflow: auto;
-        }
-        
-        .headers {
-            position: absolute;
-            left: 20%;
-            top: 7%;
-        }
-    </style>
+    
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
+
+    <script type="text/javascript"> window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js'); </script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Personal Expense Tracker</h1>
+    <div class="left-cell">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">Accounts</a>
+                </li>
+                <li>
+                    <a href="#">Placeholder Account 1</a>
+                </li>
+            </ul>
+        </div>
     </div>
+
+
+
     <div class="headers">
         <table>
             <tr>
@@ -51,7 +54,7 @@
     </div>
 </body>
 <script>
-    require('./renderer.js');
+
 </script>
 
 </html>

@@ -3,7 +3,9 @@ const electron = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
+const prompt = require('electron-prompt');
 
+var firstAccount;
 let win;
 
 app.on('ready', () => {
@@ -12,8 +14,22 @@ app.on('ready', () => {
     win = new BrowserWindow({
         width: 1400,
         height: 800,
-        useContentSize: true
+        useContentSize: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
+
+    firstAccount = prompt({
+        title: 'Add Account',
+        label: 'Account',
+        value: 'Bank Account #1',
+        inputAttrs: {
+            type: 'text'
+        },
+        type: 'input',
+        height: 180
+    }, win)
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'app/index.html'),
@@ -40,5 +56,6 @@ function addExpense(date, payee, category, payment) {
         function(err) {
             if (err) throw err;
             console.log('Added payment information');
-        });
+        }
+    );
 }
