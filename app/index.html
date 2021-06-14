@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>Personal Expense Tracker</title>
     
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css"/>
 
     <script type="text/javascript"> window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js'); </script>
     <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="left-cell">
+    <div class="left">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -29,55 +29,121 @@
     </div>
 
 
+    <div>
+        <div class="tableDisplay" style="overflow: auto;">
+            <table class="table table-bordered float-right">
+                <thead class="thead-light">
+                    <tr>
+                        <td scope="col">Entry #</td>
+                        <td scope="col">Date</td>
+                        <td scope="col">Payee</td>
+                        <td scope="col">Category</td>
+                        <td scope="col">Payment</td>
+                        <td scope="col">Deposit</td>
+                    </tr>
+                </thead>
 
-    <div class="headers">
-        <table>
-            <tr>
-                <td style="width:10%">Date</td>
-                <td style="width:10%">
-                    Payee
-                </td>
-                <td style="width:10%">
-                    Catagory
-                </td>
-                <td style="width:10%">
-                    Payment
-                </td>
-                <td style="width:10%">
-                    Date
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="scrollBox">
+                <tbody>
+                    <tr>
 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="float: right; display: inline;">
+            <form class="formPlace" method="POST" name="expense">
+                <div class="table table-bordered float-right textboxSize">
+
+                    <label>
+                        <span>Entry #</span></br>
+                        <input type="number" name="entryNum" id="entryNum"/>
+                    </label>
+
+                    <label>
+                        <span>Date</span></br>
+                        <input type="date" name="date" id="date"/>
+                    </label>
+
+                    <label>
+                        <span>Payee</span></br>
+                        <input type="text" name="payee" id="payee"/>
+                    </label>
+
+                    <label>
+                        <span>Category</span></br>
+                        <select name="dropdown" id="category">
+                            <option value="Food">Food</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Auto">Auto</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Utilities (Water, Cable TV, etc.)">Utilities (Water, Cable TV, etc.)</option>
+                            <option value="Savings">Savings</option>
+                            <option value="Investment">Investment</option>
+                        </select>
+                    </label>
+                
+                    <label>
+                        <span>Payment</br>
+                        <input type="number" name="payment" id="payment"/>
+                    </label>
+
+                    <label>
+                        <span>Deposit</br>
+                        <input type="number" name="deposit" id="deposit"/>
+                    </label>
+                    
+                </div>
+                <button>Add</button>
+            </form>
+        </div>
+        
     </div>
 </body>
-<script>
 
+<script>
+    // This section is for 
+    const formEl = document.querySelector('form');
+    const tbodyEl = document.querySelector('tbody');
+    const tableEl = document.querySelector('table');
+    const num = 1;
+
+    function onAddExpense(e) {
+        // go to server here
+        e.preventDefault();
+        const ENTRYNUM = document.getElementById("entryNum").value;
+        const DATE = document.getElementById("date").value;
+        const PAYEE = document.getElementById("payee").value;
+        const CATEGORY = document.getElementById("category").value;
+        const PAYMENT = document.getElementById("payment").value;
+        const DEPOSIT = document.getElementById("deposit").value;
+
+        tbodyEl.innerHTML += `
+            <tr>
+                <td>${ENTRYNUM}</td>
+                <td>${DATE}</td>
+                <td>${PAYEE}</td>
+                <td>${CATEGORY}</td>
+                <td>${PAYMENT}</td>
+                <td>${DEPOSIT}</td>
+
+                <td><button class="deleteButton">Delete</button></td>
+            </tr>
+        `; // MAYBE CHANGE DELETE TO A LOGO?
+    }
+
+    function onDeleteExpense(e) {
+        if (!e.target.classList.contains('deleteButton')) {
+            return;
+        }
+
+        const button = e.target;
+        button.closest('tr').remove();
+    }
+
+    formEl.addEventListener("submit", onAddExpense);
+    tableEl.addEventListener("click", onDeleteExpense);
 </script>
 
 </html>
-
-<!--
-From index.html in the electron-vue boilerplate
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset=utf-8>
-        <title>personal-expense-tracker</title>
-    </head>
-    
-    <body>
-        <div id=app></div>
-        <script>
-            if (process.env.NODE_ENV !== 'development') {
-                window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
-            }
-        </script>
-        <script type=text/javascript src=renderer.js></script>
-
-    </body>
-</html>
--->

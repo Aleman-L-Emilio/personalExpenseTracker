@@ -22,7 +22,7 @@ app.on('ready', () => {
 
     firstAccount = prompt({
         title: 'Add Account',
-        label: 'Account',
+        label: 'First Account Name',
         value: 'Bank Account #1',
         inputAttrs: {
             type: 'text'

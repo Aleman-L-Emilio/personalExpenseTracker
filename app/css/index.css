@@ -1,18 +1,48 @@
-.scrollBox {
-    position: absolute;
-    left: 20%;
-    top: 10%;
-    height: 78%;
-    width: 79%;
-    border: 1px solid #4e4e4e;
-    font: 16px Arial, Serif;
-    overflow: auto;
+table, form {
+    margin: 20px auto;
+    width: 75%;
+    float: right;
+    table-layout: fixed;
 }
 
-.headers {
+.left {
+    display: flex;
+    float: left;
+}
+
+.right {
+    display: block;
+    float: right;
+    border: 0;
+    padding: 30 10 30 10;
+    height: auto;
+    width: auto;
+}
+
+.tableDisplay {
+    width: 75%;
+    height: 75%;
+    float: right;
+    padding-right: 10px;
+}
+
+.formPlace {
     position: absolute;
-    left: 20%;
-    top: 7%;
+    bottom: 0;
+    float: right;
+    padding-right: 10px;
+}
+
+.textboxSize {
+    width: fit-content;
+    height: fit-content;
+    overflow: auto;
+    block-size: fit-content;
+    display: inline-flexbox;
+}
+
+.textboxSize label {
+    padding-right: 10px;
 }
 
 .sidebar-nav {
