@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Personal Expense Tracker</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css"/>
 
-    <script type="text/javascript"> window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js'); </script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css" />
+
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');
+    </script>
     <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
@@ -83,7 +86,7 @@
                             <option value="Investment">Investment</option>
                         </select>
                     </label>
-                
+
                     <label>
                         <span>Payment</br>
                         <input type="number" name="payment" id="payment"/>
@@ -93,12 +96,12 @@
                         <span>Deposit</br>
                         <input type="number" name="deposit" id="deposit"/>
                     </label>
-                    
+
                 </div>
                 <button>Add</button>
             </form>
         </div>
-        
+
     </div>
 </body>
 
@@ -108,6 +111,7 @@
     const tbodyEl = document.querySelector('tbody');
     const tableEl = document.querySelector('table');
     const num = 1;
+    const fs = require('fs');
 
     function onAddExpense(e) {
         // go to server here
@@ -119,18 +123,24 @@
         const PAYMENT = document.getElementById("payment").value;
         const DEPOSIT = document.getElementById("deposit").value;
 
-        tbodyEl.innerHTML += `
-            <tr>
-                <td>${ENTRYNUM}</td>
-                <td>${DATE}</td>
-                <td>${PAYEE}</td>
-                <td>${CATEGORY}</td>
-                <td>${PAYMENT}</td>
-                <td>${DEPOSIT}</td>
+        if ((ENTRYNUM !== null && ENTRYNUM > 0) && (isNaN(DATE)) && (PAYEE !== '') && ((PAYMENT !== null && PAYMENT > -1) || (DEPOSIT !== null && DEPOSIT > -1))) {
+            tbodyEl.innerHTML += `
+                <tr>
+                    <td>${ENTRYNUM}</td>
+                    <td>${DATE}</td>
+                    <td>${PAYEE}</td>
+                    <td>${CATEGORY}</td>
+                    <td>${PAYMENT}</td>
+                    <td>${DEPOSIT}</td>
 
                 <td><button class="deleteButton">Delete</button></td>
             </tr>
-        `; // MAYBE CHANGE DELETE TO A LOGO?
+            `;
+            editPaymentFile(ENTRYNUM, DATE, PAYEE, CATEGORY, PAYMENT, DEPOSIT)
+        }
+        // MAYBE CHANGE DELETE TO A LOGO?
+
+
     }
 
     function onDeleteExpense(e) {
@@ -144,6 +154,19 @@
 
     formEl.addEventListener("submit", onAddExpense);
     tableEl.addEventListener("click", onDeleteExpense);
+
+    function editPaymentFile(entrynum, date, payee, category, payment, deposit) {
+        // TODO: Make sure payee and category are strings/words, and make sure that payment is a number
+        fs.appendFile('app/expenses.txt', entrynum + '; ' +
+            date + '; ' +
+            payee + '; ' + category + '; ' + payment + '; ' +
+            deposit + '\n ',
+            function(err) {
+                if (err) throw err;
+                console.log('Added payment information');
+            }
+        );
+    }
 </script>
 
 </html>
