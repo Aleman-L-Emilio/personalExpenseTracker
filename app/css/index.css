@@ -1,3 +1,7 @@
+html {
+    background-color: #444444;
+}
+
 table, form {
     margin: 20px auto;
     width: 75%;
