@@ -112,6 +112,8 @@
     const tableEl = document.querySelector('table');
     const num = 1;
     const fs = require('fs');
+    const readline = require('readline')
+    loadExistingExpenses();
 
     function onAddExpense(e) {
         // go to server here
@@ -159,12 +161,41 @@
         fs.appendFile('app/expenses.txt', entrynum + '; ' +
             date + '; ' +
             payee + '; ' + category + '; ' + payment + '; ' +
-            deposit + '\n ',
+            deposit + '\n',
             function(err) {
                 if (err) throw err;
                 console.log('Added payment information');
             }
         );
+    }
+
+    function loadExistingExpenses(){
+        const readInterface = readline.createInterface({
+            input: fs.createReadStream('expenses.txt'),
+            output: process.stdout,
+            console: false
+        });
+        readInterface.on('line', function(line){
+            lineArr = line.split("; ");
+            ENTRYNUM = lineArr[0];
+            DATE = lineArr[1];
+            PAYEE = lineArr[2];
+            CATEGORY = lineArr[3];
+            PAYMENT = lineArr[4];
+            DEPOSIT = lineArr[5];
+            tbodyEl.innerHTML += `
+                <tr>
+                    <td>${ENTRYNUM}</td>
+                    <td>${DATE}</td>
+                    <td>${PAYEE}</td>
+                    <td>${CATEGORY}</td>
+                    <td>${PAYMENT}</td>
+                    <td>${DEPOSIT}</td>
+
+                <td><button class="deleteButton">Delete</button></td>
+            </tr>
+            `;
+        })
     }
 </script>
 
