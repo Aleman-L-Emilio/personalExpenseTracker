@@ -88,3 +88,12 @@ table, form {
         width: 250px;
     }
 }
+.tbody{
+         left: 20%;
+         top: 15%;
+         height:10%;
+         width:79%;
+         border:1px solid #4e4e4e;
+         font:16px Arial, Serif;
+         overflow:scroll;
+}
