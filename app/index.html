@@ -156,7 +156,6 @@
     tableEl.addEventListener("click", onDeleteExpense);
 
     function editPaymentFile(entrynum, date, payee, category, payment, deposit) {
-        // TODO: Make sure payee and category are strings/words, and make sure that payment is a number
         fs.appendFile('app/expenses.txt', entrynum + '; ' +
             date + '; ' +
             payee + '; ' + category + '; ' + payment + '; ' +
