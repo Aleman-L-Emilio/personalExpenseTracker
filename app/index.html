@@ -111,9 +111,10 @@
     const tbodyEl = document.querySelector('tbody');
     const tableEl = document.querySelector('table');
     const num = 1;
+    var ranAdd = false;
     const fs = require('fs');
     const readline = require('readline')
-    loadExistingExpenses();
+    
 
     function onAddExpense(e) {
         // go to server here
@@ -124,6 +125,11 @@
         const CATEGORY = document.getElementById("category").value;
         const PAYMENT = document.getElementById("payment").value;
         const DEPOSIT = document.getElementById("deposit").value;
+
+        if (!ranAdd){
+            loadExistingExpenses();
+            ranAdd = true;
+        }
 
         if ((ENTRYNUM !== null && ENTRYNUM > 0) && (isNaN(DATE)) && (PAYEE !== '') && ((PAYMENT !== null && PAYMENT > -1) || (DEPOSIT !== null && DEPOSIT > -1))) {
             tbodyEl.innerHTML += `
@@ -158,9 +164,9 @@
     tableEl.addEventListener("click", onDeleteExpense);
 
     function editPaymentFile(entrynum, date, payee, category, payment, deposit) {
-        fs.appendFile('app/expenses.txt', entrynum + '; ' +
-            date + '; ' +
-            payee + '; ' + category + '; ' + payment + '; ' +
+        fs.appendFile('app/expenses.txt', entrynum + ';' +
+            date + ';' +
+            payee + ';' + category + ';' + payment + ';' +
             deposit + '\n',
             function(err) {
                 if (err) throw err;
@@ -169,33 +175,28 @@
         );
     }
 
-    function loadExistingExpenses(){
-        const readInterface = readline.createInterface({
-            input: fs.createReadStream('expenses.txt'),
-            output: process.stdout,
-            console: false
+    async function loadExistingExpenses(){
+        const fileStream = fs.createReadStream('expenses.txt')
+
+        const rl = readline.createInterface({
+            input: fileStream,
+            crlfDelay: Infinity
         });
-        readInterface.on('line', function(line){
-            lineArr = line.split("; ");
-            ENTRYNUM = lineArr[0];
-            DATE = lineArr[1];
-            PAYEE = lineArr[2];
-            CATEGORY = lineArr[3];
-            PAYMENT = lineArr[4];
-            DEPOSIT = lineArr[5];
+        for await (const line of rl) {
+            lineArr = line.split(';');
             tbodyEl.innerHTML += `
                 <tr>
-                    <td>${ENTRYNUM}</td>
-                    <td>${DATE}</td>
-                    <td>${PAYEE}</td>
-                    <td>${CATEGORY}</td>
-                    <td>${PAYMENT}</td>
-                    <td>${DEPOSIT}</td>
+                    <td>${lineArr[0]}</td>
+                    <td>${lineArr[1]}</td>
+                    <td>${lineArr[2]}</td>
+                    <td>${lineArr[3]}</td>
+                    <td>${lineArr[4]}</td>
+                    <td>${lineArr[5]}</td>
 
                 <td><button class="deleteButton">Delete</button></td>
             </tr>
             `;
-        })
+        };
     }
 </script>
 
